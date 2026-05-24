@@ -33,7 +33,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "homekoki";
+		return "homekoki2";
 	}
 	
 }
