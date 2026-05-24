@@ -1,10 +1,11 @@
-package com.example.campuschase.controller;
+package teikyo.mcc.CampusChase.data;
 
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
 @RequestMapping("/api/rooms")
+@CrossOrigin(origins = "http://localhost:3000")
 public class RoomController {
 
     private Map<String, List<Integer>> roomUsers = new HashMap<>();
@@ -29,7 +30,7 @@ public class RoomController {
         Map<String, Object> response = new HashMap<>();
 
         response.put("roomId", roomId);
-        response.put("users", roomUsers.get(roomId));
+        response.put("users", roomUsers.getOrDefault(roomId, new ArrayList<>()));
 
         return response;
     }
@@ -44,6 +45,12 @@ public class RoomController {
 
         roomUsers.putIfAbsent(roomId, new ArrayList<>());
         roomUsers.get(roomId).add(userId);
+
+        Map<String, Object> userMap = new HashMap<>();
+        userMap.put("userId", userId);
+        userMap.put("team", null);
+
+        AdminController.addUser(roomId, userMap);
 
         Map<String, Object> response = new HashMap<>();
         response.put("roomId", roomId);
