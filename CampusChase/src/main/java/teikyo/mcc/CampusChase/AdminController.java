@@ -1,4 +1,4 @@
-package teikyo.mcc.CampusChase.data;
+package teikyo.mcc.CampusChase;
 
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
